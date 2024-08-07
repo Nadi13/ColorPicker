@@ -45,8 +45,7 @@ public class ClassicColorPicker: UIControl, ColorPicker {
         }
         colorView.addSubview(thumbView)
         thumbView.snp.makeConstraints { make in
-            make.centerX.equalTo(colorView.snp.right).multipliedBy(1.0)
-            make.centerY.equalTo(colorView.snp.bottom).multipliedBy(1.0)
+            make.edges.equalToSuperview()
             make.size.equalTo(36)
         }
         
@@ -86,10 +85,10 @@ public class ClassicColorPicker: UIControl, ColorPicker {
         super.setNeedsUpdateConstraints()
         let multiply = colorView.locationMultiply(by: color)
         let multiplyX = max(multiply.width, .leastNonzeroMagnitude)
-        let multiplyY = max(multiply.height, .leastNonzeroMagnitude)
+        let multiplyY = max(multiply.height*2, .leastNonzeroMagnitude)
         thumbView.snp.remakeConstraints { make in
             make.centerX.equalTo(colorView.snp.right).multipliedBy(multiplyX)
-            make.centerY.equalTo(colorView.snp.bottom).multipliedBy(multiplyY)
+            make.centerY.equalTo(colorView.snp.bottom).multipliedBy(multiplyY/2)
             make.size.equalTo(36)
         }
     }
